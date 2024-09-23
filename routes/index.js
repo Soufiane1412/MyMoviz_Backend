@@ -10,7 +10,7 @@ const fetchFromAPI = async (url) => {
     }
     return await response.json();
   } catch (error) {
-    console.error(`Error whilst fetching the ${url}`, err)
+    console.error(`Error whilst fetching the ${url}`, error)
     throw error;
   }
 }
@@ -27,6 +27,7 @@ router.get('/movies', async (req,res) => {
   } 
 });
 
+
 router.get('/upcomingMovies', async (req,res)=> {
   try {
     const data = await fetchFromAPI(`https://api.themoviedb.org/3/movie/upcoming?api_key=${process.env.API_KEY}`);
@@ -36,5 +37,28 @@ router.get('/upcomingMovies', async (req,res)=> {
     res.status(500).json({error: 'Failed to fetch upcoming movies data'})
   }
 });
+
+router.get('/search', async (req,res)=> {
+  const {query} = req.query;
+  if (!query) {
+    return res.status(400).json({error: 'Query parameter is required'});
+  }
+  try{
+    const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.API_KEY}&query=${query}`);
+
+    const data = await response.json();
+
+    const results = data.results.map(item => ({
+      title: item.title || item.name,
+      poster: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null,
+      voteAverage : item.vote_average,
+    }));
+
+    res.json({results})
+  } catch (error) {
+    console.error('Error in /search route:', error);
+    res.status(500).json({error: 'Failed to fetch results'})
+  }
+})
   
 module.exports = router
