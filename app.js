@@ -9,7 +9,11 @@ var indexRouter = require('./routes/index');
 var app = express();
 
 const cors = require('cors');
-app.use(cors());
+const corsOptions = {
+origin: 'http://localhost:3001', // your frontend domain
+optionsSuccessStatus: 200,
+  };
+app.use(cors(corsOptions));
 
 app.use(logger('dev'));
 app.use(express.json());

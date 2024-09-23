@@ -18,7 +18,9 @@ const fetchFromAPI = async (url) => {
 router.get('/movies', async (req,res) => {
   try {
     const data = await fetchFromAPI(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_KEY}`);
-    res.json({movies: data.reuslts});
+    console.log('fetching data')
+    res.json({movies: data.results});
+    console.log({movies: data.results});
   } catch (error) {
     console.error('Error in /movies route:' ,error)
     res.status(500).json({ error: 'Failed to fetch movies data'})
@@ -34,7 +36,6 @@ router.get('/upcomingMovies', async (req,res)=> {
     res.status(500).json({error: 'Failed to fetch upcoming movies data'})
   }
 })
-
 
   
 module.exports = router
