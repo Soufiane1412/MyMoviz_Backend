@@ -35,7 +35,6 @@ router.get('/upcomingMovies', async (req,res)=> {
     console.error('Error in /upcomingMovies route:', error);
     res.status(500).json({error: 'Failed to fetch upcoming movies data'})
   }
-})
-
+});
   
 module.exports = router
