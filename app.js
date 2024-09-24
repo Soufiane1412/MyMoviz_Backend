@@ -10,7 +10,7 @@ var app = express();
 
 const cors = require('cors');
 const corsOptions = {
-origin: 'http://localhost:3001', // your frontend domain
+origin: 'https://my-moviz--nine.vercel.app/', // your frontend domain
 optionsSuccessStatus: 200,
   };
 app.use(cors(corsOptions));
