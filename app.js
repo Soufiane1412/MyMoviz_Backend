@@ -10,8 +10,7 @@ var app = express();
 
 const cors = require('cors');
 const corsOptions = {
-origin: 'https://my-moviz--nine.vercel.app/', // your frontend domain
-optionsSuccessStatus: 200,
+  origin: '*', // Allow all domains (not recommended for production)
   };
 app.use(cors(corsOptions));
 
