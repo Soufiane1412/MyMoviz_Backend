@@ -41,8 +41,9 @@ router.get('/upcomingMovies', async (req,res)=> {
 router.get('/search', async (req,res)=> {
   const {query} = req.query;
   if (!query) {
-    return res.status(400).json({error: 'Query parameter is required'});
+    res.status(400).json({error: 'Error, a query is needed for that feature'})
   }
+
   try{
     const response = await fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.API_KEY}&query=${query}`);
 
@@ -60,5 +61,5 @@ router.get('/search', async (req,res)=> {
     res.status(500).json({error: 'Failed to fetch results'})
   }
 })
-  
+
 module.exports = router
