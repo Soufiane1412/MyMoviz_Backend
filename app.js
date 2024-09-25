@@ -11,7 +11,7 @@ var app = express();
 const cors = require('cors');
 const corsOptions = {
   origin: '*', // Allow all domains (not recommended for production)
-  };
+};
 app.use(cors(corsOptions));
 
 app.use(logger('dev'));
