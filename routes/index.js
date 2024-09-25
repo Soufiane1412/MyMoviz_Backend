@@ -52,7 +52,8 @@ router.get('/search', async (req,res)=> {
     const results = data.results.map(item => ({
       title: item.title || item.name,
       poster: item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : null,
-      voteAverage : item.vote_average,
+      voteAverage: item.vote_average,
+      overview: "https://media.themoviedb.org/t/p/w300_and_h450_bestv2/"+item.poster_path,
     }));
 
     res.json({results})
